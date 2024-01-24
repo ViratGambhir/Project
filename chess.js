@@ -146,98 +146,97 @@ function checkPossiblePlaysPawn(curX, curY) {
 
     if (curY+direction < 0 || curY+direction > BOARD_HEIGHT-1) return;
 
-    // Advance one tile
+ 
     checkPossibleMove(curX, curY+direction);
 
-    // First double move
+   
     if (curY === 1 || curY === 6) {
         checkPossibleMove(curX, curY+2*direction);
     }
 
-    // Check diagonal left capture
+    
     if (curX-1 >= 0) checkPossibleCapture(curX-1, curY+direction);
 
-    // Check diagonal right capture
+ 
     if (curX+1 <= BOARD_WIDTH-1) checkPossibleCapture(curX+1, curY+direction);
 }
 
 function checkPossiblePlaysKnight(curX, curY) {
-    // Far left moves
+    
     if (curX-2 >= 0) {
-        // Upper move
+   
         if (curY-1 >= 0) checkPossiblePlay(curX-2, curY-1);
 
-        // Lower move
+       
         if (curY+1 <= BOARD_HEIGHT-1) checkPossiblePlay(curX-2, curY+1);
     }
 
-    // Near left moves
+   
     if (curX-1 >= 0) {
-        // Upper move
+       
         if (curY-2 >= 0) checkPossiblePlay(curX-1, curY-2);
 
-        // Lower move
+        
         if (curY+2 <= BOARD_HEIGHT-1) checkPossiblePlay(curX-1, curY+2);
     }
 
-    // Near right moves
+ 
     if (curX+1 <= BOARD_WIDTH-1) {
-        // Upper move
+
         if (curY-2 >= 0) checkPossiblePlay(curX+1, curY-2);
 
-        // Lower move
+      
         if (curY+2 <= BOARD_HEIGHT-1) checkPossiblePlay(curX+1, curY+2);
     }
 
-    // Far right moves
+   
     if (curX+2 <= BOARD_WIDTH-1) {
-        // Upper move
+      
         if (curY-1 >= 0) checkPossiblePlay(curX+2, curY-1);
 
-        // Lower move
+       
         if (curY+1 <= BOARD_HEIGHT-1) checkPossiblePlay(curX+2, curY+1);
     }
 }
 
 function checkPossiblePlaysRook(curX, curY) {
-    // Upper move
+  
     for (let i = 1; curY-i >= 0; i++) {
         if (checkPossiblePlay(curX, curY-i)) break;
     }
 
-    // Right move
+  
     for (let i = 1; curX+i <= BOARD_WIDTH-1; i++) {
         if (checkPossiblePlay(curX+i, curY)) break;
     }
 
-    // Lower move
     for (let i = 1; curY+i <= BOARD_HEIGHT-1; i++) {
         if (checkPossiblePlay(curX, curY+i)) break;
     }
 
-    // Left move
+    
     for (let i = 1; curX-i >= 0; i++) {
         if (checkPossiblePlay(curX-i, curY)) break;
     }
 }
 
 function checkPossiblePlaysBishop(curX, curY) {
-    // Upper-right move
+    
     for (let i = 1; curX+i <= BOARD_WIDTH-1 && curY-i >= 0; i++) {
         if (checkPossiblePlay(curX+i, curY-i)) break;
     }
 
-    // Lower-right move
+  
     for (let i = 1; curX+i <= BOARD_WIDTH-1 && curY+i <= BOARD_HEIGHT-1; i++) {
         if (checkPossiblePlay(curX+i, curY+i)) break;
     }
 
-    // Lower-left move
+  
     for (let i = 1; curX-i >= 0 && curY+i <= BOARD_HEIGHT-1; i++) {
         if (checkPossiblePlay(curX-i, curY+i)) break;
     }
 
-    // Upper-left move
+    
     for (let i = 1; curX-i >= 0 && curY-i >= 0; i++) {
         if (checkPossiblePlay(curX-i, curY-i)) break;
     }
